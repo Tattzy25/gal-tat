@@ -3,7 +3,7 @@ import DotGrid from "./DotGrid";
 const Background = () => (
   <div
     aria-hidden="true"
-    className="pointer-events-none fixed inset-0 z-0"
+    className="pointer-events-none fixed inset-0 z-0 [clip-path:inset(0_round_24px)]"
     data-slot="background"
   >
     <div style={{ width: "100%", height: "100dvh", position: "relative" }}>

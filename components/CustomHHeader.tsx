@@ -27,10 +27,10 @@ export const CustomHHeader = ({ items, glassProps }: CustomHHeaderProps) => {
       className="sticky top-0 z-50 flex w-full justify-center py-4"
       data-slot="custom-header"
     >
-      <div className="flex justify-center">
+      <div className="flex w-full justify-center px-2">
         <GlassSurface {...glassProps}>
           <NavigationMenu viewport={false} className="flex justify-center">
-            <NavigationMenuList className="flex flex-col items-stretch justify-center gap-2 sm:flex-row sm:items-center">
+            <NavigationMenuList className="flex flex-row items-center justify-center gap-2">
               {items.map((item) => {
                 const isActive = pathname === item.href;
 
@@ -41,7 +41,7 @@ export const CustomHHeader = ({ items, glassProps }: CustomHHeaderProps) => {
                       variant="outline"
                       size="lg"
                       className={cn(
-                        "h-12 w-full rounded-full border-black bg-transparent px-8 text-base text-black shadow-none hover:bg-black/5 hover:text-black active:bg-black/10 sm:w-auto",
+                        "h-10 w-auto rounded-full border-black bg-transparent px-4 text-sm text-black shadow-none hover:bg-black/5 hover:text-black active:bg-black/10 sm:h-12 sm:px-8 sm:text-base",
                         "dark:border-white dark:text-white dark:hover:bg-white/10 dark:hover:text-white dark:active:bg-white/20",
                         isActive && "bg-black/10 dark:bg-white/20"
                       )}

@@ -14,7 +14,7 @@ export const UploadButton = () => {
   const [isUploading, setIsUploading] = useState(false);
   const isDemo =
     typeof window !== "undefined" &&
-    window.location.hostname.includes("vectr.store");
+    window.location.hostname.includes("gallery.tattty.com");
 
   const cancelUpload = () => {
     if (abortControllerRef.current) {

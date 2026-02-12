@@ -6,8 +6,8 @@ import { Results } from "@/components/results";
 import { UploadedImagesProvider } from "@/components/uploaded-images-provider";
 
 export const metadata: Metadata = {
-  title: "vectr",
-  description: "vectr",
+  title: "gallery.tattty.com",
+  description: "gallery.tattty.com",
 };
 
 const ImagesSkeleton = () => (
@@ -29,7 +29,7 @@ const ImagesSkeleton = () => (
 );
 
 const Home = () => (
-  <div className="relative min-h-screen">
+  <div className="relative min-h-screen rounded-[24px]">
     <Background />
     <div className="relative z-10">
       <UploadedImagesProvider>
@@ -39,8 +39,8 @@ const Home = () => (
             { label: "My Gallery", href: "/my-gallery" },
           ]}
           glassProps={{
-            width: 600,
-            height: 50,
+            width: "min(600px, calc(100vw - 1rem))",
+            height: 64,
             borderRadius: 20,
             className: "my-custom-class",
             displace: 0.5,
