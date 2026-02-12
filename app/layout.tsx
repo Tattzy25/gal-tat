@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import type { ReactNode } from "react";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 
@@ -30,11 +31,18 @@ type RootLayoutProps = {
 };
 
 const RootLayout = ({ children }: RootLayoutProps) => (
-  <html lang="en">
+  <html lang="en" suppressHydrationWarning>
     <body className={cn(sans.variable, mono.variable, "antialiased")}>
-      {children}
-      <Analytics />
-      <Toaster />
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        {children}
+        <Analytics />
+        <Toaster />
+      </ThemeProvider>
     </body>
   </html>
 );

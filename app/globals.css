@@ -114,6 +114,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+  }
   body {
     @apply bg-sidebar text-foreground dark:bg-background;
   }
