@@ -1,4 +1,4 @@
-# Vectr
+this is only for reference
 
 **Vectr** is an AI-powered image search application template that automatically generates descriptions for uploaded images and indexes them for semantic search.
 
@@ -60,18 +60,21 @@ sequenceDiagram
 Each step in the image processing workflow is isolated and runs on a separate serverless function with automatic retries:
 
 **Step 1: Upload Image** (`upload-image.ts`)
+
 - 💾 Uploads to Vercel Blob Storage
 - ⏱️ Handles rate limiting with 1-minute retry delays
 - 🔄 Maximum 3 retry attempts
 - ❌ Fatal error on quota exceeded or invalid files
 
 **Step 2: Generate Description** (`generate-description.ts`)
+
 - 🤖 Uses Grok 2 Vision AI to analyze the image
 - ⏱️ Handles rate limiting with 5-minute retry delays
 - 🔄 Maximum 5 retry attempts
 - ❌ Fatal error on invalid/unsupported images
 
 **Step 3: Index Image** (`index-image.ts`)
+
 - 🔎 Indexes description AND blob metadata in Upstash
 - 💾 Stores all image data (url, size, contentType, etc.) as metadata
 - ⏱️ Handles rate limiting with 1-minute retry delays
@@ -190,12 +193,12 @@ vectr/
 
 ## 🔐 Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `UPSTASH_SEARCH_URL` | Upstash Vector Search endpoint | Yes |
-| `UPSTASH_SEARCH_TOKEN` | Upstash authentication token | Yes |
-| `BLOB_READ_WRITE_TOKEN` | Vercel Blob Storage token | Yes |
-| `XAI_API_KEY` | xAI API key for Grok Vision | Yes |
+| Variable                | Description                    | Required |
+| ----------------------- | ------------------------------ | -------- |
+| `UPSTASH_SEARCH_URL`    | Upstash Vector Search endpoint | Yes      |
+| `UPSTASH_SEARCH_TOKEN`  | Upstash authentication token   | Yes      |
+| `BLOB_READ_WRITE_TOKEN` | Vercel Blob Storage token      | Yes      |
+| `XAI_API_KEY`           | xAI API key for Grok Vision    | Yes      |
 
 ## 📊 Observability
 
