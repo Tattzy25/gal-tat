@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import Background from "@/components/Background";
-import { CustomHHeader } from "@/components/CustomHHeader";
+import { CustomHHeader } from "@/components/CustomHeader";
 import { Results } from "@/components/results";
 import { UploadedImagesProvider } from "@/components/uploaded-images-provider";
 

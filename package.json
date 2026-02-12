@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "check": "npx ultracite@latest check",
-    "format": "npx ultracite@latest format"
+    "format": "npx ultracite@latest format",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

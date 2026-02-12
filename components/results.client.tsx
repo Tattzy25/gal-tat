@@ -6,7 +6,6 @@ import {
   FileIcon,
   ImageIcon,
   ImageUpIcon,
-  Loader2Icon,
   UploadIcon,
 } from "lucide-react";
 import { useActionState, useEffect } from "react";
@@ -119,13 +118,10 @@ export const ResultsClient = ({ defaultData }: ResultsClientProps) => {
           placeholder="Search by description"
           required
         />
-        {isPending ? (
-          <Button className="shrink-0" disabled size="icon" variant="ghost">
-            <Loader2Icon className="size-4 animate-spin" />
-          </Button>
-        ) : (
+        {/* NEVER MAKE THIS VISIBLE TO THE UI: keep mounted for workflow dependencies. */}
+        <div aria-hidden="true" className="hidden">
           <UploadButton />
-        )}
+        </div>
       </form>
     </>
   );
