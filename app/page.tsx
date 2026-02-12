@@ -28,7 +28,7 @@ const ImagesSkeleton = () => (
 
 const Home = () => (
   <UploadedImagesProvider>
-    <div className="container relative mx-auto px-4 py-8">
+    <div className="relative w-full py-8">
       <Suspense fallback={<ImagesSkeleton />}>
         <Results />
       </Suspense>
