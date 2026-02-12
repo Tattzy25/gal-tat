@@ -47,7 +47,7 @@ export const ResultsClient = ({ defaultData }: ResultsClientProps) => {
   return (
     <>
       {hasImages ? (
-        <div className="columns-2 gap-[3px] lg:columns-3">
+        <div className="columns-2 gap-4 sm:columns-3 md:columns-4">
           {images.map((image, index) => (
             <Preview
               key={image.url}
