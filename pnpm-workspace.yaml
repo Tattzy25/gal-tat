@@ -1,0 +1,7 @@
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@swc/core'
+  - '@tailwindcss/oxide'
+  - cbor-extract
+  - esbuild
+  - sharp
