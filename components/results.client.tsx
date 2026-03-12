@@ -124,7 +124,7 @@ export const ResultsClient = ({ defaultData }: ResultsClientProps) => {
             <Loader2Icon className="size-4 animate-spin" />
           </Button>
         ) : (
-          <UploadButton />
+          null
         )}
       </form>
     </>

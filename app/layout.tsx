@@ -23,16 +23,16 @@ const mono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://gallery.tattty.com"),
-  title: "gallery.tattty.com",
-  description: "gallery.tattty.com",
+  title: "TaTTTy",
+  description: "tattoo image generator gallery",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "gallery.tattty.com",
-    description: "gallery.tattty.com",
+    title: "TaTTTy",
+    description: "tattoo image generator gallery",
     url: "https://gallery.tattty.com",
-    siteName: "gallery.tattty.com",
+    siteName: "tattty.com",
     type: "website",
   },
 };
@@ -46,7 +46,7 @@ const RootLayout = ({ children }: RootLayoutProps) => (
     <body className={cn(sans.variable, mono.variable, "antialiased")}>
       <ThemeProvider
         attribute="class"
-        defaultTheme="system"
+        defaultTheme="dark"
         enableSystem
         disableTransitionOnChange
       >
