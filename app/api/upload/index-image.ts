@@ -1,8 +1,6 @@
 /** biome-ignore-all lint/suspicious/noConsole: "Handy for debugging" */
 
 import { Search } from "@upstash/search";
-import { FatalError, getStepMetadata, RetryableError } from "workflow";
-
 const upstash = Search.fromEnv();
 const index = upstash.index("gallery");
 
