@@ -47,7 +47,7 @@ const RootLayout = ({ children }: RootLayoutProps) => (
       <ThemeProvider
         attribute="class"
         defaultTheme="light"
-        enableSystem
+        forcedTheme="light"
         disableTransitionOnChange
       >
         {children}
