@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Rock_Salt } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import type { ReactNode } from "react";
@@ -18,6 +18,13 @@ const mono = Geist_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: "variable",
+  display: "swap",
+});
+
+const rockSalt = Rock_Salt({
+  variable: "--font-rock-salt",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -43,7 +50,7 @@ type RootLayoutProps = {
 
 const RootLayout = ({ children }: RootLayoutProps) => (
   <html lang="en" suppressHydrationWarning>
-    <body className={cn(sans.variable, mono.variable, "antialiased")}>
+    <body className={cn(sans.variable, mono.variable, rockSalt.variable, "antialiased")}>
       <ThemeProvider
         attribute="class"
         defaultTheme="light"

@@ -4,7 +4,6 @@ import {
   ArrowLeftIcon,
   FileIcon,
   ImageIcon,
-  ImageUpIcon,
   Loader2Icon,
   UploadIcon,
 } from "lucide-react";
@@ -15,8 +14,6 @@ import { Preview } from "./preview";
 import { Button } from "./ui/button";
 import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "./ui/empty";
 import { Input } from "./ui/input";
-import { UploadButton } from "./upload-button";
-import { useUploadedImages } from "./uploaded-images-provider";
 import type { GalleryItem } from "./results";
 
 type ResultsClientProps = {
@@ -26,7 +23,6 @@ type ResultsClientProps = {
 const PRIORITY_COUNT = 12;
 
 export const ResultsClient = ({ initialData }: ResultsClientProps) => {
-  const { images } = useUploadedImages();
   const [state, formAction, isPending] = useActionState(search, { data: [] });
 
   useEffect(() => {
@@ -43,22 +39,15 @@ export const ResultsClient = ({ initialData }: ResultsClientProps) => {
   const displayData =
     isSearching && state.data.length > 0 ? state.data : initialData;
 
-  const hasImages = images.length || displayData.length;
+  const hasImages = displayData.length;
 
   return (
     <>
       {hasImages ? (
         <div className="columns-2 gap-4 sm:columns-3 md:columns-4">
-          {images.map((image, index) => (
-            <Preview
-              key={image.url}
-              priority={index < PRIORITY_COUNT}
-              url={image.url}
-            />
-          ))}
           {displayData.map((item, index) => (
             <Preview
-              key={item.url}
+              key={item.id}
               priority={index < PRIORITY_COUNT}
               url={item.url}
             />
@@ -79,11 +68,7 @@ export const ResultsClient = ({ initialData }: ResultsClientProps) => {
               </div>
             </div>
             <EmptyTitle>No images found</EmptyTitle>
-            <EmptyDescription>
-              Upload some images with the{" "}
-              <ImageUpIcon className="inline size-4" /> button below to get
-              started!
-            </EmptyDescription>
+            <EmptyDescription>No images in the gallery yet.</EmptyDescription>
           </EmptyHeader>
         </Empty>
       )}
@@ -117,7 +102,12 @@ export const ResultsClient = ({ initialData }: ResultsClientProps) => {
             <Loader2Icon className="size-4 animate-spin" />
           </Button>
         ) : (
-          <UploadButton />
+          <span
+            className="flex size-9 shrink-0 items-center justify-center text-foreground"
+            style={{ fontFamily: "var(--font-rock-salt), cursive", fontSize: "1rem" }}
+          >
+            T
+          </span>
         )}
       </form>
     </>

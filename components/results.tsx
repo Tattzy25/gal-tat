@@ -17,8 +17,6 @@ export type GalleryItem = {
   body: string;
 };
 
-const FALLBACK_URL = "https://tattty-uploads.tattty.com/TATTTYLOGO.png";
-
 async function fetchInitialImages(): Promise<GalleryItem[]> {
   const upstash = Search.fromEnv();
   const index = upstash.index("gallery");
@@ -30,7 +28,7 @@ async function fetchInitialImages(): Promise<GalleryItem[]> {
 
   return documents.map((doc: any) => ({
     id: doc.id,
-    url: doc.content?.image_url || FALLBACK_URL,
+    url: doc.content?.image_url || "",
     title: doc.content?.Title || "",
     tags: doc.content?.Tags || "",
     shortDescription: doc.content?.["Short Description"] || "",

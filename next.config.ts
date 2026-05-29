@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import { withWorkflow } from "workflow/next";
 
 const nextConfig: NextConfig = {
   images: {
@@ -11,10 +10,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "*.public.blob.vercel-storage.com",
+        hostname: "*.tattty-uploads.tattty.com",
       },
     ],
   },
 };
 
-export default withWorkflow(nextConfig);
+export default nextConfig;
