@@ -10,14 +10,8 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "*.tattty-uploads.tattty.com",
-      },
-      {
-        protocol: "https",
-        hostname: "pix.tattty.com",
+        hostname: "*.pix.tattty.com",
       },
     ],
   },
 };
-
-export default nextConfig;

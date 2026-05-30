@@ -5,7 +5,6 @@ import {
   FileIcon,
   ImageIcon,
   Loader2Icon,
-  UploadIcon,
 } from "lucide-react";
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
@@ -61,7 +60,6 @@ export const ResultsClient = ({ initialData }: ResultsClientProps) => {
                 <ImageIcon className="size-5 text-muted-foreground" />
               </div>
               <div className="z-10 rounded-full border bg-background p-3 shadow-xs">
-                <UploadIcon className="size-5 text-muted-foreground" />
               </div>
               <div className="-translate-x-2 translate-y-2 rotate-12 rounded-full border bg-background p-3 shadow-xs">
                 <FileIcon className="size-5 text-muted-foreground" />
