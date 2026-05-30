@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "*.tattty-uploads.tattty.com",
       },
+      {
+        protocol: "https",
+        hostname: "pix.tattty.com",
+      },
     ],
   },
 };
