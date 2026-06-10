@@ -16,23 +16,19 @@ export async function search(
     return { error: "Missing search query" };
   }
 
-  try {
-    // One Upstash Search call per search submit
-    const docs: any[] = await imageIndex.search({
-      query,
-      limit: 50,
-    });
+  // One Upstash Search call per search submit
+  const docs: any[] = await imageIndex.search({
+    query,
+    limit: 50,
+  });
 
-    const data: ImageItem[] = docs
-      .map((doc) => ({
-        id: String(doc.id),
-        url: String(doc.content?.image_url ?? ""),
-        style: doc.content?.style ? String(doc.content.style) : undefined,
-      }))
-      .filter((d) => d.url.trim().length > 0);
+  const data: ImageItem[] = docs
+    .map((doc) => ({
+      id: String(doc.id),
+      url: String(doc.content?.image_url ?? ""),
+      style: doc.content?.style ? String(doc.content.style) : undefined,
+    }))
+    .filter((d) => d.url.trim().length > 0);
 
-    return { data };
-  } catch {
-    return { error: "Search failed" };
-  }
+  return { data };
 }
