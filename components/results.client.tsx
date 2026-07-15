@@ -2,19 +2,19 @@
 "use client";
 
 import { ArrowLeftIcon, ImageIcon, Loader2Icon } from "lucide-react";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
-import { search } from "@/app/actions/search";
+import { loadMoreImages, search } from "@/app/actions/search";
 import { Preview } from "./preview";
 import { Button } from "./ui/button";
 import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "./ui/empty";
 import { Input } from "./ui/input";
-import type { ImageItem } from "./results";
+import type { ImageItem, InitialData } from "./results";
 
 type State = { data: ImageItem[] } | { error: string };
 
 type Props = {
-  initialData: ImageItem[];
+  initialData: InitialData;
 };
 
 const PRIORITY_COUNT = 12;
@@ -24,6 +24,12 @@ export function ResultsClient({ initialData }: Props) {
     search,
     { data: [] },
   );
+  const [items, setItems] = useState<ImageItem[]>(initialData.items);
+  const [nextCursor, setNextCursor] = useState<string | null>(initialData.nextCursor);
+  const [hasMore, setHasMore] = useState(Boolean(initialData.nextCursor));
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isSearchMode, setIsSearchMode] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if ("error" in state) {
@@ -31,8 +37,51 @@ export function ResultsClient({ initialData }: Props) {
     }
   }, [state]);
 
-  const isSearching = "data" in state && state.data.length > 0;
-  const items = isSearching ? state.data : initialData;
+  useEffect(() => {
+    if (!("data" in state)) return;
+
+    if (state.data.length > 0) {
+      setItems(state.data);
+      setNextCursor(null);
+      setHasMore(false);
+      setIsSearchMode(true);
+      return;
+    }
+
+    if (isSearchMode) {
+      setItems([]);
+      setNextCursor(null);
+      setHasMore(false);
+    }
+  }, [state, isSearchMode]);
+
+  useEffect(() => {
+    if (isSearchMode || !hasMore || isLoadingMore) return;
+
+    const node = sentinelRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0]?.isIntersecting) return;
+
+        void (async () => {
+          setIsLoadingMore(true);
+          const result = await loadMoreImages(nextCursor);
+          setItems((prev) => [...prev, ...result.items]);
+          setNextCursor(result.nextCursor);
+          setHasMore(Boolean(result.nextCursor));
+          setIsLoadingMore(false);
+        })();
+      },
+      { rootMargin: "400px 0px" },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [hasMore, isLoadingMore, isSearchMode, nextCursor]);
+
+  const isSearching = isSearchMode && items.length > 0;
   const hasImages = items.length > 0;
 
   return (
@@ -46,6 +95,14 @@ export function ResultsClient({ initialData }: Props) {
               url={item.url}
             />
           ))}
+          {!isSearchMode ? (
+            <div
+              className="col-span-full py-4 text-center text-sm text-muted-foreground"
+              ref={sentinelRef}
+            >
+              {isLoadingMore ? "Loading more…" : hasMore ? "Scroll for more" : null}
+            </div>
+          ) : null}
         </div>
       ) : (
         <Empty className="h-full min-h-[50vh] rounded-lg border">

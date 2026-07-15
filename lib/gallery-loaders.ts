@@ -14,11 +14,13 @@ function mapDocToGalleryItem(doc: any): GalleryItem | null {
   const content = doc.content ?? {};
 
   const url: string =
-    typeof content.image_url === "string"
-      ? content.image_url
-      : typeof content.style_image_url === "string"
-        ? content.style_image_url
-        : "";
+    typeof content.image_urls === "string"
+      ? content.image_urls
+      : typeof content.image_url === "string"
+        ? content.image_url
+        : typeof content.style_image_url === "string"
+          ? content.style_image_url
+          : "";
 
   if (!url || url.trim().length === 0) return null;
 
